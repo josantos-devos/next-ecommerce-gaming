@@ -5,13 +5,16 @@ import { map } from "lodash";
 import Link from "next/link";
 import { Icon, Image, Input } from "semantic-ui-react";
 import classNames from "classnames";
+import { useRouter } from "next/router";
 
 const platformCrtl = new Platform();
 
 export function Menu(props) {
   const { isOpenSearch } = props;
   const [platforms, setPlatforms] = useState(null);
-  const [showSearch, setShowsSearch] = useState(false);
+  const [showSearch, setShowsSearch] = useState(isOpenSearch);
+  const [searchText, setSearchText] = useState("");
+  const router = useRouter();
 
   const openCloseSearch = () => setShowsSearch((prevState) => !prevState);
 
@@ -25,6 +28,15 @@ export function Menu(props) {
       }
     })();
   }, []);
+
+  useEffect(() => {
+    setSearchText(router.query.s ?? "");
+  }, []);
+
+  const onSearch = (text) => {
+    setSearchText(text);
+    router.replace(`/search?s=${text}`);
+  };
 
   return (
     <div className={styles.platforms}>
@@ -48,7 +60,9 @@ export function Menu(props) {
           id="search-games"
           placeholder="Buscador"
           className={styles.input}
-          focus
+          focus={true}
+          value={searchText}
+          onChange={(_, data) => onSearch(data.value)}
         />
         <Icon
           name="close"

@@ -4,7 +4,9 @@ import { Image } from "semantic-ui-react";
 import { Account } from "../Account";
 import { Menu } from "../Menu";
 
-export function TopBar() {
+export function TopBar(props) {
+  const { isOpenSearch } = props;
+
   return (
     <div className={styles.topBar}>
       <div className={styles.left}>
@@ -14,7 +16,7 @@ export function TopBar() {
       </div>
 
       <div className={styles.center}>
-        <Menu />
+        <Menu isOpenSearch={isOpenSearch} />
       </div>
 
       <div className={styles.right}>

@@ -2,13 +2,26 @@ import { Button, Icon } from "semantic-ui-react";
 import styles from "./Address.module.scss";
 import { AddressForm } from "../../AddressForm";
 import { useState } from "react";
-import { BasicModal } from "@/components/Shared";
+import { BasicModal, Confirm } from "@/components/Shared";
+import { Address as AddressCrtl } from "@/api/address";
 
 export function Address(props) {
+  const addressCrtl = new AddressCrtl();
   const { addressId, address, onReload } = props;
   const [showEdit, setShowEdit] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const onOpenCloseEdit = () => setShowEdit((prevState) => !prevState);
+  const onOpenCloseConfirm = () => setShowConfirm((prevState) => !prevState);
+
+  const onDelete = async () => {
+    try {
+      await addressCrtl.delete(addressId);
+      onReload();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>
@@ -25,11 +38,18 @@ export function Address(props) {
           <Button primary icon onClick={onOpenCloseEdit}>
             <Icon name="pencil" />
           </Button>
-          <Button primary icon>
+          <Button primary icon onClick={onOpenCloseConfirm}>
             <Icon name="delete" />
           </Button>
         </div>
       </div>
+
+      <Confirm
+        open={showConfirm}
+        onCancel={onOpenCloseConfirm}
+        onConfirm={onDelete}
+        content="¿Estas seguro que quieres eliminar la dirección?"
+      />
 
       <BasicModal
         show={showEdit}
