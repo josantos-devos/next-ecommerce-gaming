@@ -1,5 +1,4 @@
 import { ENV } from "@/utils";
-import { authFetch } from "@/utils/authFetch";
 
 export class Game {
   async getLastPublished() {
@@ -8,7 +7,12 @@ export class Game {
       const pagination = "pagination[limit]=1";
       const populate = "populate=*";
       const url = `${ENV.API_URL}/${ENV.ENDPOINTS.GAME}?${sort}&${pagination}&${populate}`;
-      const response = await authFetch(url);
+
+      const params = {
+        method: "GET",
+      };
+
+      const response = await fetch(url, params);
       const result = await response.json();
 
       if (response.status !== 200) throw result;
@@ -27,8 +31,12 @@ export class Game {
       const populate = `populate=*`;
       const urlParams = `${sort}&${paginationLimit}&${filterPlatform}&${populate}`;
 
+      const params = {
+        method: "GET",
+      };
+
       const url = `${ENV.API_URL}/${ENV.ENDPOINTS.GAME}?${urlParams}`;
-      const response = await authFetch(url);
+      const response = await fetch(url, params);
       const result = await response.json();
 
       if (response.status !== 200) throw result;
@@ -47,7 +55,11 @@ export class Game {
       const urlParams = `${filters}&${pagination}&${populate}`;
       const url = `${ENV.API_URL}/${ENV.ENDPOINTS.GAME}?${urlParams}`;
 
-      const response = await fetch(url);
+      const params = {
+        method: "GET",
+      };
+
+      const response = await fetch(url, params);
       const result = await response.json();
 
       if (response.status !== 200) throw result;
@@ -66,7 +78,11 @@ export class Game {
       const urlParams = `${filters}&${pagination}&${populate}`;
       const url = `${ENV.API_URL}/${ENV.ENDPOINTS.GAME}?${urlParams}`;
 
-      const response = await fetch(url);
+      const params = {
+        method: "GET",
+      };
+
+      const response = await fetch(url, params);
       const result = await response.json();
 
       if (response.status !== 200) throw result;
@@ -86,12 +102,36 @@ export class Game {
       const urlParams = `${filters}&${populates}`;
       const url = `${ENV.API_URL}/${ENV.ENDPOINTS.GAME}?${urlParams}`;
 
-      const response = await fetch(url);
+      const params = {
+        method: "GET",
+      };
+
+      const response = await fetch(url, params);
       const result = await response.json();
 
       if (response.status !== 200) throw result;
 
       return result.data[0];
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getGameById(id) {
+    try {
+      const populate = "populate[0]=cover&populate[1]=platform";
+      const url = `${ENV.API_URL}/${ENV.ENDPOINTS.GAME}/${id}?${populate}`;
+
+      const params = {
+        method: "GET",
+      };
+
+      const response = await fetch(url, params);
+      const result = await response.json();
+
+      if (response.status !== 200) throw result;
+
+      return result;
     } catch (error) {
       throw error;
     }

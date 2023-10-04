@@ -1,5 +1,6 @@
 import { Home } from "@/components/Home";
 import { BannerAd, BarTrust, Separator } from "@/components/Shared";
+import { useCart } from "@/hooks";
 import { BasicLayout } from "@/layouts";
 import { Container } from "semantic-ui-react";
 
@@ -11,6 +12,8 @@ const platformId = {
 };
 
 export default function home() {
+  console.log(useCart());
+
   return (
     <>
       {/* SEO */}

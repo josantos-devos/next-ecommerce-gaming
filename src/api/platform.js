@@ -7,7 +7,11 @@ export class Platform {
       const populate = "populate=icon";
       const url = `${ENV.API_URL}/${ENV.ENDPOINTS.PLATFORM}?${populate}&${sort}`;
 
-      const response = await fetch(url);
+      const params = {
+        method: "GET",
+      };
+
+      const response = await fetch(url, params);
       const result = await response.json();
 
       if (response.status !== 200) throw result;
@@ -23,7 +27,11 @@ export class Platform {
       const filters = `filters[slug][$eq]=${slug}`;
       const url = `${ENV.API_URL}/${ENV.ENDPOINTS.PLATFORM}?${filters}`;
 
-      const response = await fetch(url);
+      const params = {
+        method: "GET",
+      };
+
+      const response = await fetch(url, params);
       const result = await response.json();
 
       if (response.status !== 200) throw result;

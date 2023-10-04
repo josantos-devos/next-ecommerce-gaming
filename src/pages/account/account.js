@@ -1,6 +1,6 @@
 import { Tab } from "semantic-ui-react";
 
-import { Address, Info, Settings } from "@/components/Account";
+import { Address, Info, Settings, Wishlist } from "@/components/Account";
 import { BasicLayout } from "@/layouts";
 import styles from "./account.module.scss";
 import { useAuth } from "@/hooks";
@@ -33,7 +33,8 @@ export default function AccountPage() {
       menuItem: "Lista de deseos",
       render: () => (
         <Tab.Pane attached={false}>
-          <p>Lista de deseos...</p>
+          <Wishlist />
+          <Separator height={80} />
         </Tab.Pane>
       ),
     },

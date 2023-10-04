@@ -3,12 +3,14 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "@/scss/global.scss";
 
-import { AuthProvider } from "@/contexts";
+import { AuthProvider, CartProvider } from "@/contexts";
 
 export default function App({ Component, pageProps }) {
   return (
     <AuthProvider>
-      <Component {...pageProps} />
+      <CartProvider>
+        <Component {...pageProps} />
+      </CartProvider>
     </AuthProvider>
   );
 }
