@@ -2,6 +2,7 @@ import { JoinLayout } from "@/layouts/JoinLayout";
 import styles from "./sign-up.module.scss";
 import Link from "next/link";
 import { RegisterForm } from "@/components/Auth";
+import { Seo } from "@/components/Shared";
 
 export default function SignUpPage() {
   return (

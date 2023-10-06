@@ -1,5 +1,6 @@
 import { Token } from "@/api";
 import { User } from "@/api";
+import { BasicModal } from "@/components/Shared";
 
 const { createContext, useState, useEffect } = require("react");
 
@@ -51,7 +52,7 @@ export function AuthProvider({ children }) {
   };
 
   const updateUser = (key, value) => {
-    console.log(key, value)
+    console.log(key, value);
     setUser({
       ...user,
       [key]: value,
@@ -68,5 +69,11 @@ export function AuthProvider({ children }) {
 
   if (loading) return null;
 
-  return <AuthContext.Provider value={data}>{children}</AuthContext.Provider>;
+  return (
+    <>
+      <AuthContext.Provider value={data}>
+        <>{children}</>
+      </AuthContext.Provider>
+    </>
+  );
 }

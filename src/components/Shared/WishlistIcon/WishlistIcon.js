@@ -3,7 +3,7 @@ import { Icon } from "semantic-ui-react";
 import classNames from "classnames";
 
 import { WishList } from "@/api/wishlist";
-import { useAuth } from "@/hooks";
+import { useApp, useAuth } from "@/hooks";
 
 import styles from "./WishlistIcon.module.scss";
 
@@ -13,6 +13,7 @@ export function WishlistIcon(props) {
   const { gameId, className, removeCallback } = props;
   const [hasWishList, setHasWishList] = useState(null);
   const { user } = useAuth();
+  const { onLoading } = useApp();
 
   useEffect(() => {
     try {
@@ -28,21 +29,27 @@ export function WishlistIcon(props) {
 
   const addWishList = async () => {
     try {
+      onLoading(true);
       const response = await wishListCrtl.add(user.id, gameId);
+      onLoading(false);
       setHasWishList(response);
     } catch (error) {
       console.error(error);
     }
   };
+
   const deleteWishList = async () => {
     try {
+      onLoading(true);
       await wishListCrtl.delete(hasWishList.id);
+      onLoading(false);
       setHasWishList(false);
 
       if (removeCallback) {
         removeCallback();
       }
     } catch (error) {
+      onLoading(false);
       console.error(error);
     }
   };
