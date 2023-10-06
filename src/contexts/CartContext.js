@@ -35,12 +35,17 @@ export function CartProvider(props) {
     refleshTotalCart();
   };
 
+  const deleteAllItems = () => {
+    cartCrtl.deleteAll();
+    refleshTotalCart();
+  };
+
   const data = {
     cart,
     addCart,
     total,
     deleteItem,
-    deleteAllItems: () => {},
+    deleteAllItems,
     changeQuantityItem,
   };
 

@@ -1,5 +1,5 @@
 import { Game } from "@/components/Game";
-import { Separator } from "@/components/Shared";
+import { Seo, Separator } from "@/components/Shared";
 import { BasicLayout } from "@/layouts";
 
 export default function GamePage(props) {
@@ -9,6 +9,11 @@ export default function GamePage(props) {
 
   return (
     <>
+      <Seo
+        title={game.attributes.title}
+        description={game.attributes.summary}
+      />
+
       <BasicLayout>
         <Game.HeaderWallpaper image={wallpaper.data.attributes.url} />
         <Game.Panel gameId={game.id} game={game.attributes} />

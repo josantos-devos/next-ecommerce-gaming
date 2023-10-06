@@ -1,4 +1,5 @@
 import { ENV } from "@/utils";
+import { authFetch } from "@/utils/authFetch";
 import { forEach } from "lodash";
 
 export class Cart {
@@ -47,5 +48,33 @@ export class Cart {
     const updateGames = games.filter((game) => game.id !== gameId);
 
     localStorage.setItem(ENV.CART, JSON.stringify(updateGames));
+  }
+
+  deleteAll() {
+    localStorage.removeItem(ENV.CART);
+  }
+
+  async paymentCart(token, products, idUser, address) {
+    try {
+      const url = `${ENV.API_URL}/${ENV.ENDPOINTS.PAYMENT_ORDER}`;
+
+      const params = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          token,
+          idUser,
+          products,
+          addressShipping: address,
+        }),
+      };
+
+      const response = await authFetch(url, params);
+      return response;
+    } catch (error) {
+      throw error;
+    }
   }
 }

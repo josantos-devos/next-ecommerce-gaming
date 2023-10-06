@@ -1,5 +1,5 @@
 import { Home } from "@/components/Home";
-import { BannerAd, BarTrust, Separator } from "@/components/Shared";
+import { BannerAd, BarTrust, Seo, Separator } from "@/components/Shared";
 import { useCart } from "@/hooks";
 import { BasicLayout } from "@/layouts";
 import { Container } from "semantic-ui-react";
@@ -16,7 +16,7 @@ export default function home() {
 
   return (
     <>
-      {/* SEO */}
+      <Seo />
 
       <BasicLayout>
         <Home.BannerLastGamePublished />

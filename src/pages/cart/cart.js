@@ -1,7 +1,9 @@
 import { Game } from "@/api";
 import { Cart } from "@/components/Cart";
+import { NoResult, Seo } from "@/components/Shared";
 import { useCart } from "@/hooks";
 import { CartLayout } from "@/layouts";
+import { size } from "lodash";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -31,12 +33,24 @@ export default function CartPage() {
     })();
   }, [cart]);
 
+  console.log(cart);
+
+  if (size(cart) === 0) {
+    return (
+      <CartLayout>
+        <NoResult text="Sin juegos en el carrito." />
+      </CartLayout>
+    );
+  }
+
   return (
     <>
+      <Seo title="Carrito" />
+
       <CartLayout>
         {currentStep === 1 && <Cart.StepOne games={games} />}
-        {currentStep === 2 && <p>STEP TWO</p>}
-        {currentStep === 3 && <p>STEP THREE</p>}
+        {currentStep === 2 && <Cart.StepTwo games={games} />}
+        {currentStep === 3 && <Cart.StepThree />}
       </CartLayout>
     </>
   );

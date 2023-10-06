@@ -2,6 +2,7 @@ import {
   GridGames,
   NoResult,
   Pagination,
+  Seo,
   Separator,
 } from "@/components/Shared";
 import { BasicLayout } from "@/layouts";
@@ -14,6 +15,8 @@ export default function PlatformPage(props) {
 
   return (
     <>
+      <Seo title={`Juegos de ${platform.attributes.title}`} />
+
       <BasicLayout relative>
         <Container>
           <Separator height={50} />

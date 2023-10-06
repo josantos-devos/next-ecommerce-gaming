@@ -3,10 +3,14 @@ import Link from "next/link";
 import { JoinLayout } from "@/layouts/JoinLayout";
 import styles from "./sign-in.module.scss";
 import LoginForm from "@/components/Auth/LoginForm/LoginForm";
+import { Seo } from "@/components/Shared";
 
 export default function SignInPage() {
 
   return (
+    <>
+    <Seo title="Iniciar sesión" />
+    
     <JoinLayout>
       <div className={styles.signIn}>
         <h3>Iniciar sesión</h3>
@@ -18,5 +22,6 @@ export default function SignInPage() {
         </div>
       </div>
     </JoinLayout>
+    </>
   );
 }

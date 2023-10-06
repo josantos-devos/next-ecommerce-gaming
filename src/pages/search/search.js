@@ -2,6 +2,7 @@ import {
   GridGames,
   NoResult,
   Pagination,
+  Seo,
   Separator,
 } from "@/components/Shared";
 import { BasicLayout } from "@/layouts";
@@ -19,6 +20,8 @@ export default function SearchPage(props) {
 
   return (
     <>
+      <Seo title="Busqueda" />
+      
       <BasicLayout relative isOpenSearch>
         <Container>
           <Separator height={50} />
